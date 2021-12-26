@@ -1,0 +1,13 @@
+kind: pipeline
+type: docker
+name: Format check
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+  - name: gofmt
+    image: golang:alpine
+    commands:
+      - test -z $(gofmt -l .)
