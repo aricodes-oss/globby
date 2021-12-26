@@ -7,18 +7,12 @@ import (
 )
 
 var Context = context.Background()
-var client *redis.Client = nil
+var Client *redis.Client = nil
 
-func Client() *redis.Client {
-	if client != nil {
-		return client
-	}
-
-	client = redis.NewClient(&redis.Options{
+func init() {
+	Client = redis.NewClient(&redis.Options{
 		Addr:     "cache:6379",
 		Password: "", // No password, docker internal network only
 		DB:       0,  // Use default DB
 	})
-
-	return client
 }

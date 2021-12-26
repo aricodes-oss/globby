@@ -11,7 +11,7 @@ func producer(lifecycle chan bool) {
 	fmt.Println("Producing...")
 	defer close(lifecycle)
 
-	connection := cache.Client()
+	connection := cache.Client
 	rand.Seed(time.Now().Unix())
 
 	for i := 0; i <= 10; i++ {
@@ -26,7 +26,7 @@ func consumer(lifecycle chan bool) {
 	fmt.Println("Consuming...")
 	defer close(lifecycle)
 
-	connection := cache.Client()
+	connection := cache.Client
 	topic := connection.Subscribe(cache.Context, "pubs").Channel()
 
 	for {

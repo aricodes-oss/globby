@@ -1,5 +1,7 @@
 FROM golang:alpine
 
+RUN apk add gcc sqlite sqlite-dev musl-dev
+
 RUN mkdir /globby
 WORKDIR /globby
 
