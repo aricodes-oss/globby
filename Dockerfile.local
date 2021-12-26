@@ -1,0 +1,8 @@
+FROM golang:alpine
+
+RUN mkdir /globby
+WORKDIR /globby
+
+RUN go get github.com/silenceper/gowatch
+
+CMD ["gowatch"]
