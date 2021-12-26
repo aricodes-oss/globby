@@ -29,6 +29,11 @@ trigger:
     - push
 
 steps:
+  - name: Generate new tags
+    image: alpine:latest
+    steps:
+      - echo "latest,latest-$(date +%Y%m%d-%H%M)" > .tags
+
   - name: Build container
     image: plugins/docker
     settings:
@@ -39,6 +44,4 @@ steps:
       repo: aricodes/globby
       mirror:
         from_secret: DOCKER_MIRROR
-      tags:
-        - latest
-        - $(date +%Y%m%d-%H%M)
+      insecure: true
