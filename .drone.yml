@@ -44,4 +44,3 @@ steps:
       repo: aricodes/globby
       mirror:
         from_secret: DOCKER_MIRROR
-      insecure: true
