@@ -1,3 +1,4 @@
+---
 kind: pipeline
 type: docker
 name: Format check
@@ -11,3 +12,33 @@ steps:
     image: golang:alpine
     commands:
       - test -z $(gofmt -l .)
+
+---
+kind: pipeline
+type: docker
+name: Publish
+
+platform:
+  os: linux
+  arch: arm64
+
+trigger:
+  branch:
+    - main
+  event:
+    - push
+
+steps:
+  - name: Build container
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo: aricodes/globby
+      mirror:
+        from_secret: DOCKER_MIRROR
+      tags:
+        - latest
+        - $(date +%Y%m%d-%H%M)
