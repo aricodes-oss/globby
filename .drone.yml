@@ -31,7 +31,7 @@ trigger:
 steps:
   - name: Generate new tags
     image: alpine:latest
-    steps:
+    commands:
       - echo "latest,latest-$(date +%Y%m%d-%H%M)" > .tags
 
   - name: Build container
